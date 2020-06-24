@@ -3602,3 +3602,39 @@ h1, h2, h3, h4, h5, h6 {
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
+.popup-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 888;
+}
+.popup-overlay{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.8)
+}
+.popup-wrapper{
+  /* width: 100%; */
+  max-width: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 50px
+}
+.popup-wrapper td{
+  padding: 10px 0;
+  padding-right: 50px;
+}
+.popup-wrapper .price{
+
+  color: #4cd3e3;
+  font-size: 20px;
+  font-weight: 500;
+}
