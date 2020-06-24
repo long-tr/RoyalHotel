@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoomModule } from './room/room.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
-  imports: [RoomModule,
+  imports: [RoomModule, OrderModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -15,7 +16,7 @@ import { RoomModule } from './room/room.module';
       database: 'royal',
       autoLoadEntities: true,
       synchronize: true,
-    }),
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
