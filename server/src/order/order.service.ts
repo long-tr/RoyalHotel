@@ -14,6 +14,7 @@ export class OrderService {
         return this.orderRepository.find()
     }
     async addOne(order: OrderDto): Promise<any>{
+        console.log(order)
         const newOrder = new Order()
         newOrder.name = order.name
         newOrder.adult = order.adult
@@ -23,6 +24,7 @@ export class OrderService {
         newOrder.numberOfRoom = order.numberOfRoom
         newOrder.numberOfDate = order.numberOfDate
         newOrder.totalPrice = order.totalPrice
+        console.log(newOrder)
         await this.orderRepository.save(newOrder)
         return {
             success: true,

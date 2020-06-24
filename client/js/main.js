@@ -10,10 +10,18 @@ function getInfo(id) {
         })
     }
 }
+function saveOrder(order){
+    return axios.post('http://localhost:3000/order', order)
+}
 function convertDate(inputFormat) {
     function pad(s) { return (s < 10) ? '0' + s : s; }
     var d = new Date(inputFormat)
     return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+  }
+  function monthFirst(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [ pad(d.getMonth()+1), pad(d.getDate()), d.getFullYear()].join('/')
   }
 var btn = document.querySelectorAll('.book_now_btn')
 var body = document.querySelector('body')
@@ -68,6 +76,7 @@ btn.forEach(function(item){
                                 <td class='price'>${ total.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) }</td>
                             </tr>
                         </table>
+                        <a class="book_now_btn button_hover mt-3" id='save' href="#">Xác nhận</a>
                     </div>
                 </div>
             `
@@ -75,6 +84,25 @@ btn.forEach(function(item){
             body.appendChild(el)
             var overlay = document.querySelector('.popup-overlay')
             var container = document.querySelector('.popup-container')
+            var wrapper = document.querySelector('.popup-wrapper')
+            var save = document.getElementById('save')
+            save.addEventListener('click', function(){
+                let order = {
+                    name: item.id,
+                    adult: parseInt(adult),
+                    child: parseInt(child),
+                    startDate: monthFirst(startDate),
+                    endDate: monthFirst(endDate),
+                    numberOfDate: parseInt(numberOfDate),
+                    numberOfRoom: parseInt(numberOfRoom),
+                    totalPrice: parseInt(total)
+                }
+                saveOrder(order).then(function(res){
+                    wrapper.innerHTML = 'Chúc mừng bạn đặt phòng thành công'
+                }).catch(function(err){
+                    wrapper.innerHTML = err
+                })
+            })
             overlay.addEventListener('click',function(){
                 container.remove()
             })
